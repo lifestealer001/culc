@@ -130,7 +130,9 @@ class _MyWidgetState extends State<MyWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(onPressed: () {}, child: Text('.')),
+              ElevatedButton(onPressed: () {setState(() {
+                
+              });}, child: Text('.')),
               ElevatedButton(onPressed: () {}, child: Text('0')),
               ElevatedButton(onPressed: () {}, child: Text('=')),
               ElevatedButton(onPressed: () {}, child: Text('/')),
