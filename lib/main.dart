@@ -13,7 +13,7 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   TextEditingController controller = TextEditingController();
-  TextEditingController _controller = TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class _MyWidgetState extends State<MyWidget> {
           TextField(
             decoration: InputDecoration(border: OutlineInputBorder()),
             keyboardType: TextInputType.none,
-            controller: _controller,
+            controller: controller,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -37,7 +37,11 @@ class _MyWidgetState extends State<MyWidget> {
               ElevatedButton(onPressed: () {}, child: Text('x2')),
               ElevatedButton(onPressed: () {}, child: Text('%')),
               ElevatedButton(onPressed: () {}, child: Text('C')),
-              ElevatedButton(onPressed: () {}, child: Text('clear')),
+              ElevatedButton(
+                  onPressed: () {
+                    controller.text = ' ';
+                  },
+                  child: Text('clear')),
             ],
           ),
           Row(
@@ -46,25 +50,31 @@ class _MyWidgetState extends State<MyWidget> {
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _controller.text += '1';
+                      controller.text += '1';
                     });
                   },
                   child: Text('1')),
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _controller.text += '2';
+                      controller.text += '2';
                     });
                   },
                   child: Text('2')),
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _controller.text += '3';
+                      controller.text += '3';
                     });
                   },
                   child: Text('3')),
-              ElevatedButton(onPressed: () {}, child: Text('+')),
+              ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      controller.text += '+';
+                    });
+                  },
+                  child: Text('+')),
             ],
           ),
           Row(
@@ -73,28 +83,28 @@ class _MyWidgetState extends State<MyWidget> {
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _controller.text += '4';
+                      controller.text += '4';
                     });
                   },
                   child: Text('4')),
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _controller.text += '5';
+                      controller.text += '5';
                     });
                   },
                   child: Text('5')),
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _controller.text += '6';
+                      controller.text += '6';
                     });
                   },
                   child: Text('6')),
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _controller.text += '-';
+                      controller.text += '-';
                     });
                   },
                   child: Text('-')),
@@ -106,21 +116,21 @@ class _MyWidgetState extends State<MyWidget> {
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _controller.text += '7';
+                      controller.text += '7';
                     });
                   },
                   child: Text('7')),
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _controller.text += '8';
+                      controller.text += '8';
                     });
                   },
                   child: Text('8')),
               ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _controller.text += '9';
+                      controller.text += '9';
                     });
                   },
                   child: Text('9')),
@@ -130,11 +140,20 @@ class _MyWidgetState extends State<MyWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(onPressed: () {setState(() {
-                
-              });}, child: Text('.')),
-              ElevatedButton(onPressed: () {}, child: Text('0')),
-              ElevatedButton(onPressed: () {}, child: Text('=')),
+              ElevatedButton(onPressed: () {}, child: Text('.')),
+              ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      controller.text += '0';
+                    });
+                  },
+                  child: Text('0')),
+              ElevatedButton(
+                  onPressed: () {
+                    String s = controller.text;
+                    int ind = s.indexOf('+');
+                  },
+                  child: Text('=')),
               ElevatedButton(onPressed: () {}, child: Text('/')),
             ],
           ),
