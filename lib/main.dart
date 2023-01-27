@@ -13,7 +13,16 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   TextEditingController controller = TextEditingController();
-  
+
+  Widget button(
+    String l,
+  ) {
+    return ElevatedButton(
+        onPressed: () {
+          controller.text += l;
+        },
+        child: Text(l));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +43,14 @@ class _MyWidgetState extends State<MyWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(onPressed: () {}, child: Text('x2')),
-              ElevatedButton(onPressed: () {}, child: Text('%')),
-              ElevatedButton(onPressed: () {}, child: Text('C')),
+              button('x2'),
+              button('%'),
+              ElevatedButton(
+                  onPressed: () {
+                    String s = controller.text;
+                    controller.text = s.substring(0, s.length - 1);
+                  },
+                  child: Text('C')),
               ElevatedButton(
                   onPressed: () {
                     controller.text = ' ';
@@ -47,114 +61,61 @@ class _MyWidgetState extends State<MyWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '1';
-                    });
-                  },
-                  child: Text('1')),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '2';
-                    });
-                  },
-                  child: Text('2')),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '3';
-                    });
-                  },
-                  child: Text('3')),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '+';
-                    });
-                  },
-                  child: Text('+')),
+              button('1'),
+              button('2'),
+              button('3'),
+              button('+'),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '4';
-                    });
-                  },
-                  child: Text('4')),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '5';
-                    });
-                  },
-                  child: Text('5')),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '6';
-                    });
-                  },
-                  child: Text('6')),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '-';
-                    });
-                  },
-                  child: Text('-')),
+              button('4'),
+              button('5'),
+              button('6'),
+              button('-'),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '7';
-                    });
-                  },
-                  child: Text('7')),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '8';
-                    });
-                  },
-                  child: Text('8')),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '9';
-                    });
-                  },
-                  child: Text('9')),
-              ElevatedButton(onPressed: () {}, child: Text('*')),
+              button('7'),
+              button('8'),
+              button('9'),
+              button('*'),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(onPressed: () {}, child: Text('.')),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      controller.text += '0';
-                    });
-                  },
-                  child: Text('0')),
+              button('.'),
+              button('0'),
               ElevatedButton(
                   onPressed: () {
                     String s = controller.text;
-                    int ind = s.indexOf('+');
+                    if (s.contains('+'))
+                      controller.text =
+                          (int.parse(s.substring(0, s.indexOf('+'))) +
+                                  int.parse(s.substring(s.indexOf('+') + 1)))
+                              .toString();
+                    if (s.contains('-'))
+                      controller.text =
+                          (int.parse(s.substring(0, s.indexOf('-'))) -
+                                  int.parse(s.substring(s.indexOf('-') + 1)))
+                              .toString();
+                    if (s.contains('*'))
+                      controller.text =
+                          (int.parse(s.substring(0, s.indexOf('*'))) *
+                                  int.parse(s.substring(s.indexOf('*') + 1)))
+                              .toString();
+                    if (s.contains('/'))
+                      controller.text =
+                          (double.parse(s.substring(0, s.indexOf('/'))) /
+                                  double.parse(s.substring(s.indexOf('/') + 1)))
+                              .toString();
                   },
                   child: Text('=')),
-              ElevatedButton(onPressed: () {}, child: Text('/')),
+              button('/'),
             ],
           ),
         ],
